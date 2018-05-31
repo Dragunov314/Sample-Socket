@@ -33,8 +33,9 @@ namespace Socket_Client
         {
             try
             {
-                client = new TcpClient("127.0.0.1", 1980); //Trys to Connect
+                client = new TcpClient(IPAddressBox.Text, Convert.ToInt32(portBox.Text)); //Trys to Connect
                 ClientReceive(); //Starts Receiving When Connected
+                btnConnect.Enabled = false;
             }
             catch (Exception ex)
             {
@@ -46,7 +47,7 @@ namespace Socket_Client
         {
 
             stream = client.GetStream(); //Gets The Stream of The Connection
-            new Thread(() => // Thread (like Timer)
+            Thread t = new Thread(() => // Thread (like Timer)
             {
                 while ((i = stream.Read(datalength, 0, 4)) != 0)//Keeps Trying to Receive the Size of the Message or Data
                 {
@@ -55,10 +56,13 @@ namespace Socket_Client
                     stream.Read(data, 0, data.Length); //Receives The Real Data not the Size
                     this.Invoke((MethodInvoker)delegate // To Write the Received data
                     {
-                        txtLog.Text += System.Environment.NewLine + "Server : " + Encoding.Default.GetString(data); // Encoding.Default.GetString(data); Converts Bytes Received to String
+                        txtLog.AppendText(System.Environment.NewLine + "Server : " + Encoding.Default.GetString(data));
+                        // Encoding.Default.GetString(data); Converts Bytes Received to String
                     });
                 }
-            }).Start(); // Start the Thread
+            });
+            t.IsBackground = true;
+            t.Start(); // Start the Thread
         }
         
         public void ClientSend(string msg)
@@ -79,6 +83,11 @@ namespace Socket_Client
             {
                 ClientSend(txtSend.Text); // uses the Function ClientSend and the msg as txtSend.Text
             }
+        }
+
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+
         }
     }
 }
