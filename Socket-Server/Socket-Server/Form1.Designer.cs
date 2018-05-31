@@ -38,11 +38,13 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.portBox = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.cmdBox = new System.Windows.Forms.GroupBox();
+            this.cmdBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnListen
             // 
-            this.btnListen.Location = new System.Drawing.Point(312, 278);
+            this.btnListen.Location = new System.Drawing.Point(164, 6);
             this.btnListen.Name = "btnListen";
             this.btnListen.Size = new System.Drawing.Size(75, 23);
             this.btnListen.TabIndex = 0;
@@ -52,7 +54,7 @@
             // 
             // btnSend
             // 
-            this.btnSend.Location = new System.Drawing.Point(163, 277);
+            this.btnSend.Location = new System.Drawing.Point(166, 28);
             this.btnSend.Name = "btnSend";
             this.btnSend.Size = new System.Drawing.Size(75, 23);
             this.btnSend.TabIndex = 1;
@@ -62,34 +64,33 @@
             // 
             // txtLog
             // 
-            this.txtLog.Location = new System.Drawing.Point(12, 18);
+            this.txtLog.Location = new System.Drawing.Point(6, 109);
             this.txtLog.Multiline = true;
             this.txtLog.Name = "txtLog";
             this.txtLog.ReadOnly = true;
             this.txtLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtLog.Size = new System.Drawing.Size(226, 253);
+            this.txtLog.Size = new System.Drawing.Size(375, 140);
             this.txtLog.TabIndex = 2;
             // 
             // txtSend
             // 
-            this.txtSend.Location = new System.Drawing.Point(12, 277);
+            this.txtSend.Location = new System.Drawing.Point(6, 28);
             this.txtSend.Name = "txtSend";
-            this.txtSend.Size = new System.Drawing.Size(139, 23);
+            this.txtSend.Size = new System.Drawing.Size(154, 23);
             this.txtSend.TabIndex = 3;
             // 
             // onlineStatusBox
             // 
-            this.onlineStatusBox.Enabled = false;
             this.onlineStatusBox.FormattingEnabled = true;
-            this.onlineStatusBox.Location = new System.Drawing.Point(253, 44);
+            this.onlineStatusBox.Location = new System.Drawing.Point(247, 27);
             this.onlineStatusBox.Name = "onlineStatusBox";
-            this.onlineStatusBox.Size = new System.Drawing.Size(134, 112);
+            this.onlineStatusBox.Size = new System.Drawing.Size(134, 76);
             this.onlineStatusBox.TabIndex = 4;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(250, 19);
+            this.label1.Location = new System.Drawing.Point(244, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(98, 15);
             this.label1.TabIndex = 5;
@@ -103,7 +104,7 @@
             // 
             // portBox
             // 
-            this.portBox.Location = new System.Drawing.Point(338, 240);
+            this.portBox.Location = new System.Drawing.Point(105, 6);
             this.portBox.Name = "portBox";
             this.portBox.Size = new System.Drawing.Size(49, 23);
             this.portBox.TabIndex = 7;
@@ -112,30 +113,43 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(248, 243);
+            this.label3.Location = new System.Drawing.Point(15, 9);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(84, 15);
             this.label3.TabIndex = 9;
             this.label3.Text = "Server Port";
             // 
+            // cmdBox
+            // 
+            this.cmdBox.Controls.Add(this.onlineStatusBox);
+            this.cmdBox.Controls.Add(this.label1);
+            this.cmdBox.Controls.Add(this.btnSend);
+            this.cmdBox.Controls.Add(this.txtSend);
+            this.cmdBox.Controls.Add(this.txtLog);
+            this.cmdBox.Enabled = false;
+            this.cmdBox.Location = new System.Drawing.Point(12, 35);
+            this.cmdBox.Name = "cmdBox";
+            this.cmdBox.Size = new System.Drawing.Size(392, 255);
+            this.cmdBox.TabIndex = 10;
+            this.cmdBox.TabStop = false;
+            this.cmdBox.Text = " Command Box";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(397, 310);
+            this.ClientSize = new System.Drawing.Size(413, 298);
+            this.Controls.Add(this.cmdBox);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.portBox);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.onlineStatusBox);
-            this.Controls.Add(this.txtSend);
-            this.Controls.Add(this.txtLog);
-            this.Controls.Add(this.btnSend);
             this.Controls.Add(this.btnListen);
             this.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "Form1";
             this.Text = "Server";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.cmdBox.ResumeLayout(false);
+            this.cmdBox.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -152,6 +166,7 @@
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.TextBox portBox;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.GroupBox cmdBox;
     }
 }
 

@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
+using System.Globalization;
 
 namespace Socket_Server
 {
@@ -44,14 +45,16 @@ namespace Socket_Server
                         stream.Read(data, 0, data.Length); //Receives The Real Data not the Size
                         this.Invoke((MethodInvoker)delegate // To Write the Received data
                         {
-                            txtLog.AppendText(System.Environment.NewLine + "Client : " + Encoding.Default.GetString(data));
+                            DateTime localDate = DateTime.Now;
+                            String timestamp = localDate.ToString(new CultureInfo("en-US")); 
+                            txtLog.AppendText(System.Environment.NewLine + timestamp+" | Client : " + Encoding.Default.GetString(data));
                             // Encoding.Default.GetString(data); Converts Bytes Received to String
                         });
                     }
                 }
                 catch (Exception e)
                 {
-
+                    MessageBox.Show(e.Message);
                 }
             });
             t.IsBackground=true;
@@ -65,25 +68,32 @@ namespace Socket_Server
                 onlineStatusBox.Items.Clear();
             });
 
-            List<int> delete_index = new List<int>();    
-            for (int i = 0; i < clients.Count; i++)
+            try
             {
-                if (clients[i].Connected==false)
+                List<int> delete_index = new List<int>();
+                for (int i = 0; i < clients.Count; i++)
                 {
-                    delete_index.Add(i);                    
-                }                
-            }
-            for (int i = 0; i < delete_index.Count; i++)
-            {
-                clients.RemoveAt(delete_index[i]);
-            }
-            for (int i = 0; i < clients.Count; i++)
-            {
-                this.Invoke((MethodInvoker)delegate
+                    if (clients[i].Connected == false)
+                    {
+                        delete_index.Add(i);
+                    }
+                }
+                for (int i = 0; i < delete_index.Count; i++)
                 {
-                    onlineStatusBox.Items.Add("Client "+i, true);
-                });
+                    clients.RemoveAt(delete_index[i]);
+                }
+                for (int i = 0; i < clients.Count; i++)
+                {
+                    this.Invoke((MethodInvoker)delegate
+                    {
+                        onlineStatusBox.Items.Add("Client " + i, true);
+                    });
+                }
             }
+            catch (Exception e)
+            {
+            }
+            
         }
 
         public void ServerSend(string msg)
@@ -141,7 +151,9 @@ namespace Socket_Server
             });
             t.IsBackground = true;
             t.Start();
+
             btnListen.Enabled = false;
+            cmdBox.Enabled = true;
         }
 
         private void btnSend_Click(object sender, EventArgs e)
