@@ -108,7 +108,7 @@
             this.portBox.Name = "portBox";
             this.portBox.Size = new System.Drawing.Size(49, 23);
             this.portBox.TabIndex = 7;
-            this.portBox.Text = "1980";
+            this.portBox.Text = "8080";
             // 
             // label3
             // 

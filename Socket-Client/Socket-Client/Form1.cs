@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
+using System.Globalization;
 
 namespace Socket_Client
 {
@@ -56,7 +57,9 @@ namespace Socket_Client
                     stream.Read(data, 0, data.Length); //Receives The Real Data not the Size
                     this.Invoke((MethodInvoker)delegate // To Write the Received data
                     {
-                        txtLog.AppendText(System.Environment.NewLine + "Server : " + Encoding.Default.GetString(data));
+                        DateTime localDate = DateTime.Now;
+                        String timestamp = localDate.ToString(new CultureInfo("en-US"));
+                        txtLog.AppendText(System.Environment.NewLine + timestamp + " | Server : " + Encoding.Default.GetString(data));
                         // Encoding.Default.GetString(data); Converts Bytes Received to String
                     });
                 }

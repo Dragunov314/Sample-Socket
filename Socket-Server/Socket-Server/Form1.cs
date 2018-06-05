@@ -42,7 +42,9 @@ namespace Socket_Server
                     {
                         // how to make a byte E.X byte[] examlpe = new byte[the size of the byte here] , i used BitConverter.ToInt32(datalength,0) cuz i received the length of the data in byte called datalength :D
                         byte[] data = new byte[BitConverter.ToInt32(datalength, 0)]; // Creates a Byte for the data to be Received On
+                        
                         stream.Read(data, 0, data.Length); //Receives The Real Data not the Size
+                        
                         this.Invoke((MethodInvoker)delegate // To Write the Received data
                         {
                             DateTime localDate = DateTime.Now;
